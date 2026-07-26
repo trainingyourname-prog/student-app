@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0">
+
+    <title>Manabraj Quiz App v3.0</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- ===========================
+     PIN LOCK SCREEN
+============================ -->
+
+<!-- ===========================
+     PIN LOCK SCREEN
+============================ -->
+
+<div id="lockScreen">
+
+    <div class="lock-overlay">
+
+        <!-- Logo -->
+        <div class="loginLogo">
+
+            <div class="logoCircle">
+                🛡️
+            </div>
+
+            <h2>Student Login</h2>
+
+        </div>
+
+        <!-- Title -->
+        <h2 class="pinTitle">
+            🔐 Enter PIN
+        </h2>
+
+        <!-- PIN -->
+        <input
+                id="pinInput"
+                type="password"
+                placeholder="Enter PIN"
+                autocomplete="off">
+
+        <!-- Button -->
+        <button
+                class="unlockBtn"
+                onclick="checkPin()">
+
+            Unlock 🔓
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+     MAIN APP
+============================ -->
+
+<div class="app">
+
+    <!-- ===========================
+         HOME PAGE
+    ============================ -->
+
+    <div id="homePage">
+
+        <div class="topbar">
+
+            <button onclick="showSetup()">
+
+                ➕ New Quiz
+
+            </button>
+
+            <button onclick="showHistory()">
+
+                📂 History
+
+            </button>
+
+            <button onclick="openTimerSettings()">
+
+                ⏱ Timer
+
+            </button>
+
+            <button onclick="toggleTheme()">
+
+                🌙 Theme
+
+            </button>
+
+        </div>
+
+        <div id="historyPage" style="display:none;">
+            <div class="historyBox" id="historyBox"></div>
+        </div>
+
+        <div class="bottom-video">
+            <video id="introVideo" autoplay muted playsinline></video>
+        </div>
+
+    </div>
+
+
+    <!-- ===========================
+     SETUP PAGE
+============================ -->
+
+    <div id="setupPage" style="display:none;">
+
+        <h2>
+
+            📂 Upload Quiz File
+
+        </h2>
+
+        <input
+
+                id="fileInput"
+
+                type="file"
+
+                accept=".json,.xls,.xlsx">
+
+        <textarea
+
+                id="jsonInput"
+
+                placeholder="Paste JSON here...">
+
+</textarea>
+
+        <button onclick="loadNewQuiz()">
+
+            ▶ Start Quiz
+
+        </button>
+
+        <button onclick="goHome()">
+
+            🏠 Home
+
+        </button>
+
+    </div>
+
+    <!-- ===========================
+         QUIZ PAGE
+    ============================ -->
+
+    <div id="quizPage" style="display:none;">
+
+        <div id="timer" class="timer">
+            ⏱ 00:00
+        </div>
+
+        <div class="progress">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <div class="quizToolbar">
+
+            <label class="autoNextBox">
+                <input type="checkbox" id="autoNext" checked>
+                <span>Auto Next</span>
+            </label>
+
+            <div class="quizButtons">
+                <button onclick="prevQ()">⬅</button>
+                <button onclick="pauseTimer()">⏸</button>
+                <button onclick="nextQ()">➡</button>
+            </div>
+
+        </div>
+
+        <div id="quiz"></div>
+
+    </div>
+
+    <!-- ===========================
+         RESULT PAGE
+    ============================ -->
+
+    <div id="resultPage" style="display:none;">
+
+        <h2>
+
+            Quiz Result
+
+        </h2>
+
+        <div id="resultText">
+
+        </div>
+
+        <canvas
+
+                id="chart">
+
+        </canvas>
+
+        <button onclick="reviewMode()">
+
+            🔁 Review
+
+        </button>
+
+        <button onclick="restartQuiz()">
+
+            ♻ Restart
+
+        </button>
+
+        <button onclick="goHome()">
+
+            🏠 Home
+
+        </button>
+
+    </div>
+
+    <!-- ===========================
+         TIMER PAGE
+    ============================ -->
+
+    <div id="timerPage" style="display:none;">
+
+        <h2>
+
+            Timer Settings
+
+        </h2>
+
+        <input
+
+                id="timeValue"
+
+                type="number"
+
+                placeholder="Enter Time">
+
+        <select id="timeUnit">
+
+            <option value="sec">
+
+                Seconds
+
+            </option>
+
+            <option value="min">
+
+                Minutes
+
+            </option>
+
+            <option value="hr">
+
+                Hours
+
+            </option>
+
+        </select>
+
+        <button onclick="saveTimer()">
+
+            💾 Save Timer
+
+        </button>
+
+        <button onclick="goHome()">
+
+            🏠 Home
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================
+     JAVASCRIPT FILES
+====================================== -->
+
+    <script src="js/config.js"></script>
+
+    <script src="js/state.js"></script>
+
+    <script src="js/app.js"></script>
+
+    <script src="js/quiz.js"></script>
+
+    <script src="js/timer.js"></script>
+
+    <script src="js/history.js"></script>
+
+    <script src="js/pin.js"></script>
+
+    <script src="js/video.js"></script>
+
+    <!-- =====================================
+         APP START
+    ====================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded",function(){
+
+            // Check Login
+
+            if(localStorage.getItem("login")!=="yes"){
+
+                window.location="Login Home Page.html";
+
+                return;
+
+            }
+
+            // Load History
+
+            if(typeof loadHistory==="function"){
+
+                loadHistory();
+
+            }
+
+            // Restore Quiz Progress
+
+            if(typeof loadProgress==="function"){
+
+                loadProgress();
+
+            }
+
+            // Load Video Playlist
+
+            if(typeof playCurrent==="function"){
+
+                playCurrent();
+
+            }
+
+            // PIN Focus
+
+            const pin=document.getElementById("pinInput");
+
+            if(pin){
+
+                pin.focus();
+
+                pin.addEventListener("keypress",function(e){
+
+                    if(e.key==="Enter"){
+
+                        checkPin();
+
+                    }
+
+                });
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+
+
+<!-- =====================================
+     APP INITIALIZER
+====================================== -->
+
+<script>
+
+    window.addEventListener("load", function () {
+
+        // Login Check
+        if (localStorage.getItem("login") !== "yes") {
+            window.location.href = "Login Home Page.html";
+            return;
+        }
+
+        // History
+        if (typeof loadHistory === "function") {
+            loadHistory();
+        }
+
+        // Timer
+        if (typeof loadSavedTimer === "function") {
+            loadSavedTimer();
+        }
+
+        // Video Playlist
+        if (typeof playCurrent === "function") {
+            playCurrent();
+        }
+
+        // Restore Quiz
+        if (typeof loadProgress === "function") {
+            loadProgress();
+        }
+
+        // PIN Input
+        const pin = document.getElementById("pinInput");
+
+        if (pin) {
+
+            pin.focus();
+
+            pin.addEventListener("keydown", function (e) {
+
+                if (e.key === "Enter") {
+
+                    checkPin();
+
+                }
+
+            });
+
+        }
+
+        console.log("✅ Student Login Enterprise v3.0 Loaded");
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0">
+
+    <title>Student Login v3.0</title>
+
+    <link rel="stylesheet" href="css/login.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="js/config.js"></script>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <img
+            src="images/logo.png"
+            class="logo"
+            alt="Logo">
+
+    <h2>Student Login</h2>
+
+    <input
+            id="name"
+            type="text"
+            placeholder="Student Name">
+
+    <input
+            id="phone"
+            type="tel"
+            placeholder="WhatsApp Number">
+
+    <input
+            id="email"
+            type="email"
+            placeholder="Education Gmail">
+
+    <input
+            id="password"
+            type="password"
+            placeholder="Password">
+
+    <button
+            onclick="login()">
+        Login
+    </button>
+
+    <div class="links">
+
+        <a
+                href="#"
+                onclick="forgotPassword()">
+
+            Forgot Password?
+
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+    function forgotPassword(){
+
+    const email =
+    document.getElementById("email").value.trim();
+
+    if(email===""){
+
+    Swal.fire({
+
+    icon:"warning",
+
+    title:"Email Required",
+
+    text:"Enter your registered Gmail."
+
+    });
+
+    return;
+
+    }
+
+    localStorage.setItem(
+
+    "resetEmail",
+
+    email
+
+    );
+
+    window.location =
+
+    "Reset Password Code.html";
+
+    }
+
+    async function login(){
+
+    const name =
+    document.getElementById("name").value.trim();
+
+    const phone =
+    document.getElementById("phone").value.trim();
+
+    const email =
+    document.getElementById("email").value.trim();
+
+    const password =
+    document.getElementById("password").value.trim();
+
+    if(
+
+    name==="" ||
+
+    phone==="" ||
+
+    email==="" ||
+
+    password===""
+
+    ){
+
+    Swal.fire({
+
+    icon:"warning",
+
+    title:"Missing Information",
+
+    text:"Fill all fields."
+
+    });
+
+    return;
+
+    }
+
+    if(
+
+    !/^[6-9]\d{9}$/
+
+    .test(phone)
+
+    ){
+
+    Swal.fire({
+
+    icon:"error",
+
+    title:"Invalid Number",
+
+    text:"Enter valid WhatsApp number."
+
+    });
+
+    return;
+
+    }
+
+    if(
+
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+    .test(email)
+
+    ){
+
+    Swal.fire({
+
+    icon:"error",
+
+    title:"Invalid Email",
+
+    text:"Enter valid Gmail."
+
+    });
+
+    return;
+
+    }
+
+    try{
+
+    const res =
+
+    await fetch(
+
+    WEBAPP_URL,
+
+    {
+
+    method:"POST",
+
+    body:JSON.stringify({
+
+    studentName:name,
+
+    whatsapp:phone,
+
+    email:email,
+
+    password:password
+
+    })
+
+    }
+
+    );
+
+    const json =
+
+    await res.json();
+
+    if(json.status==="success"){
+
+    const student={
+
+    id:json.studentId,
+
+    name:json.studentName,
+
+    phone:json.whatsapp,
+
+    email:json.email
+
+};
+
+localStorage.setItem(
+
+    "currentStudent",
+
+    JSON.stringify(student)
+
+);
+
+    localStorage.setItem(
+
+        "login",
+
+        "yes"
+
+    );
+
+    Swal.fire({
+
+        icon:"success",
+
+        title:"Login Success",
+
+        timer:1200,
+
+        showConfirmButton:false
+
+    }).then(()=>{
+
+        window.location="App Code.html";
+
+    });
+
+}
+
+    else if(
+
+    json.status==="registered"
+
+    ){
+
+    Swal.fire({
+
+    icon:"success",
+
+    title:"Registration Complete",
+
+    text:json.message
+
+    });
+
+    }
+
+    else{
+
+    Swal.fire({
+
+    icon:"error",
+
+    title:"Login Failed",
+
+    text:json.message
+
+    });
+
+    }
+
+    }
+
+    catch(e){
+
+    Swal.fire({
+
+    icon:"error",
+
+    title:"Network Error",
+
+    text:e.message
+
+    });
+
+    }
+
+    }
+
+</script>
+
+</body>
+</html>

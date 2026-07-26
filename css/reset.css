@@ -1,0 +1,267 @@
+/*=========================================
+    STUDENT LOGIN v3.0
+    reset.css
+==========================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+    padding:20px;
+
+}
+
+/*=========================================
+RESET CARD
+==========================================*/
+
+.reset-box{
+
+    width:100%;
+
+    max-width:420px;
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.25);
+
+}
+
+/*=========================================
+LOGO
+==========================================*/
+
+.logo{
+
+    width:110px;
+
+    height:110px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    margin-bottom:18px;
+
+}
+
+/*=========================================
+TITLE
+==========================================*/
+
+h2{
+
+    color:#333;
+
+    font-size:30px;
+
+    margin-bottom:10px;
+
+}
+
+/*=========================================
+SUBTITLE
+==========================================*/
+
+.subtitle{
+
+    color:#666;
+
+    font-size:15px;
+
+    margin-bottom:22px;
+
+    line-height:1.5;
+
+}
+
+/*=========================================
+INPUT
+==========================================*/
+
+input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border:1px solid #cccccc;
+
+    border-radius:12px;
+
+    outline:none;
+
+    font-size:16px;
+
+    transition:.30s;
+
+}
+
+input:focus{
+
+    border-color:#667eea;
+
+    box-shadow:
+    0 0 8px rgba(102,126,234,.35);
+
+}
+
+/*=========================================
+BUTTON
+==========================================*/
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#667eea;
+
+    color:#ffffff;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.30s;
+
+}
+
+button:hover{
+
+    background:#5b6be0;
+
+    transform:translateY(-2px);
+
+}
+
+/*=========================================
+LINK
+==========================================*/
+
+a{
+
+    color:#667eea;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    font-size:15px;
+
+}
+
+a:hover{
+
+    text-decoration:underline;
+
+}
+
+/*=========================================
+INFO BOX
+==========================================*/
+
+.info-box{
+
+    margin-top:20px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    background:#f5f5f5;
+
+    color:#666;
+
+    font-size:14px;
+
+}
+
+/*=========================================
+FOOTER
+==========================================*/
+
+.footer{
+
+    margin-top:25px;
+
+    font-size:13px;
+
+    color:#888;
+
+}
+
+/*=========================================
+MOBILE
+==========================================*/
+
+@media(max-width:480px){
+
+.reset-box{
+
+    padding:25px;
+
+}
+
+.logo{
+
+    width:90px;
+
+    height:90px;
+
+}
+
+h2{
+
+    font-size:26px;
+
+}
+
+.subtitle{
+
+    font-size:14px;
+
+}
+
+button{
+
+    font-size:17px;
+
+}
+
+}

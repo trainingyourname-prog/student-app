@@ -1,0 +1,653 @@
+/*=========================================
+    MANABRAJ QUIZ APP
+    Enterprise v3.0
+==========================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+
+    --primary:#667eea;
+    --secondary:#764ba2;
+    --success:#28a745;
+    --danger:#dc3545;
+    --warning:#ffc107;
+    --white:#ffffff;
+    --black:#000000;
+    --gray:#eeeeee;
+
+}
+
+body{
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:#fff;
+
+    min-height:100vh;
+
+}
+
+/*=========================================
+APP
+==========================================*/
+
+.app{
+
+    max-width:430px;
+
+    margin:auto;
+
+    background:#ffffff;
+
+    color:#000;
+
+    border-radius:18px;
+
+    margin-top:35px;   /* আগে ছিল 12px */
+
+    padding:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+}
+
+/*=========================================
+TOP BAR
+==========================================*/
+
+.topbar{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    flex-wrap:nowrap;
+
+    margin-bottom:15px;
+
+}
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:var(--primary);
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    margin:5px 0;
+
+
+}
+
+button:hover{
+
+    transform:scale(1.05);
+
+}
+
+/*=========================================
+INPUT
+==========================================*/
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    margin:8px 0;
+
+    border-radius:10px;
+
+    border:1px solid #cccccc;
+
+    outline:none;
+
+}
+
+textarea{
+
+    min-height:180px;
+
+    resize:vertical;
+
+}
+
+/*=========================================
+QUIZ
+==========================================*/
+
+.option{
+
+    background:#ffffff;
+
+    border:1px solid #cccccc;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    margin-top:10px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.option:hover{
+
+    transform:scale(1.02);
+
+}
+
+.correct{
+
+    background:#d4edda !important;
+
+    border:2px solid #28a745;
+
+    color:#155724;
+
+    font-weight:bold;
+
+}
+
+.wrong{
+
+    background:#f8d7da !important;
+
+    border:2px solid #dc3545;
+
+    color:#721c24;
+
+    font-weight:bold;
+
+}
+
+.option.disabled{
+
+    pointer-events:none;
+
+}
+
+/*=========================================
+PROGRESS
+==========================================*/
+
+.progress{
+
+    height:8px;
+
+    border-radius:20px;
+
+    background:#ddd;
+
+    margin:15px 0;
+
+}
+
+.progress-bar{
+
+    background:#667eea;
+
+}
+
+/*=========================================
+TIMER
+==========================================*/
+
+.timer{
+
+    text-align:center;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#667eea;
+
+    margin-bottom:18px;
+
+}
+
+/*=========================================
+RESULT
+==========================================*/
+
+#resultPage{
+
+    text-align:center;
+
+}
+
+#chart{
+
+    width:100%;
+
+    max-width:320px;
+
+    margin:auto;
+
+}
+
+/*=========================================
+HISTORY
+==========================================*/
+
+.historyBox{
+
+    max-height:250px;
+
+    overflow:auto;
+
+    border:1px solid #dddddd;
+
+    border-radius:10px;
+
+    padding:10px;
+
+}
+
+.history-item{
+
+    padding:10px;
+
+    margin-bottom:8px;
+
+    border-radius:8px;
+
+    background:#f6f6f6;
+
+    cursor:pointer;
+
+}
+
+.history-item:hover{
+
+    background:#dddddd;
+
+}
+
+/*=========================================
+History Buttons
+==========================================*/
+
+.history-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:12px;
+
+}
+
+.history-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+}
+
+.history-buttons button{
+    flex:1;
+    padding:8px 12px;      /* আগে 10px 15px ছিল */
+    font-size:14px;        /* আগে 15px ছিল */
+    border-radius:10px;    /* আগে 12px ছিল */
+    min-height:42px;       /* বাটনের উচ্চতা কম */
+}
+
+/*=========================================
+VIDEO
+==========================================*/
+
+.bottom-video{
+
+    margin-top:20px;
+
+    text-align:center;
+
+}
+
+.bottom-video video{
+
+    width:100%;
+
+    border-radius:15px;
+
+    object-fit:cover;
+
+}
+
+/*=========================================
+PIN SCREEN
+==========================================*/
+
+#lockScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    background:url("../images/lock_bg.jpg")
+    center center/cover no-repeat;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+#lockScreen::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+}
+
+.lock-overlay{
+
+    position:relative;
+
+    z-index:5;
+
+    width:90%;
+
+    max-width:320px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(8px);
+
+    padding:25px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+}
+
+.lock-logo{
+
+    width:90px;
+
+    margin-bottom:15px;
+
+}
+
+#pinInput{
+
+    text-align:center;
+
+    font-size:20px;
+
+}
+
+/*=========================================
+DARK MODE
+==========================================*/
+
+.dark{
+
+    background:#111111;
+
+}
+
+.dark .app{
+
+    background:#1e1e1e;
+
+    color:#ffffff;
+
+}
+
+.dark input,
+.dark textarea,
+.dark select{
+
+    background:#2c2c2c;
+
+    color:#ffffff;
+
+    border:1px solid #444;
+
+}
+
+.dark .option{
+
+    background:#2f2f2f;
+
+    color:#fff;
+
+    border:2px solid #555;
+
+}
+
+.dark .option.correct{
+
+    background:#4CAF50 !important;
+
+    color:#fff !important;
+
+    border-color:#2E7D32 !important;
+
+}
+
+.dark .option.wrong{
+
+    background:#F44336 !important;
+
+    color:#fff !important;
+
+    border-color:#C62828 !important;
+
+}
+
+.dark .history-item{
+
+    background:#2d2d2d;
+
+}
+
+/*=========================================
+MOBILE
+==========================================*/
+
+@media(max-width:480px){
+
+#homePage .topbar{
+
+    flex-direction:column;
+
+}
+
+#homePage .topbar button{
+
+    width:100%;
+
+}
+
+}
+
+
+body{
+
+    padding-top:env(safe-area-inset-top,35px);
+
+}
+
+/*=========================================
+Quiz Page
+==========================================*/
+
+.autoNextBox{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    margin-bottom:15px;
+
+}
+
+.autoNextBox input{
+
+    width:20px;
+
+    height:20px;
+
+    accent-color:#667eea;
+
+}
+
+/*=========================================
+Quiz Buttons
+==========================================*/
+.quizButtons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:14px;
+
+}
+
+.quizButtons button{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:14px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    padding:0;
+
+    margin:0;
+
+    background:#667eea;
+
+    color:#fff;
+
+    box-shadow:0 3px 8px rgba(0,0,0,.18);
+
+}
+
+
+/* ==============================
+   Modern Login Screen
+============================== */
+
+.loginLogo{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.logoCircle{
+    width:90px;
+    height:90px;
+    margin:auto;
+    border-radius:50%;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    color:#fff;
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+}
+
+.loginLogo h2{
+    margin-top:15px;
+    color:#fff;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.pinTitle{
+    text-align:center;
+    margin-bottom:18px;
+    color:#fff;
+    font-size:30px;
+}
+
+#pinInput{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:14px;
+    background:#2d2d2d;
+    color:#fff;
+    text-align:center;
+    font-size:20px;
+}
+
+#pinInput::placeholder{
+    color:#999;
+}
+
+.unlockBtn{
+    margin-top:18px;
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(102,126,234,.45);
+}

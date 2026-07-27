@@ -24,13 +24,6 @@ const WEBAPP_URL =
  SECURITY
 -----------------------------------------*/
 
-// App Lock PIN
-
-const APP_PIN = "2026";
-
-// Maximum Wrong PIN Attempts
-
-const MAX_PIN_ATTEMPTS = 5;
 
 /*-----------------------------------------
  VIDEO PLAYLIST

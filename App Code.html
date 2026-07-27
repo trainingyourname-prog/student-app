@@ -22,55 +22,6 @@
 </head>
 
 <body>
-
-<!-- ===========================
-     PIN LOCK SCREEN
-============================ -->
-
-<!-- ===========================
-     PIN LOCK SCREEN
-============================ -->
-
-<div id="lockScreen">
-
-    <div class="lock-overlay">
-
-        <!-- Logo -->
-        <div class="loginLogo">
-
-            <div class="logoCircle">
-                🛡️
-            </div>
-
-            <h2>Student Login</h2>
-
-        </div>
-
-        <!-- Title -->
-        <h2 class="pinTitle">
-            🔐 Enter PIN
-        </h2>
-
-        <!-- PIN -->
-        <input
-                id="pinInput"
-                type="password"
-                placeholder="Enter PIN"
-                autocomplete="off">
-
-        <!-- Button -->
-        <button
-                class="unlockBtn"
-                onclick="checkPin()">
-
-            Unlock 🔓
-
-        </button>
-
-    </div>
-
-</div>
-
 <!-- ===========================
      MAIN APP
 ============================ -->
@@ -312,8 +263,6 @@
 
     <script src="js/history.js"></script>
 
-    <script src="js/pin.js"></script>
-
     <script src="js/video.js"></script>
 
     <!-- =====================================
@@ -358,26 +307,6 @@
 
             }
 
-            // PIN Focus
-
-            const pin=document.getElementById("pinInput");
-
-            if(pin){
-
-                pin.focus();
-
-                pin.addEventListener("keypress",function(e){
-
-                    if(e.key==="Enter"){
-
-                        checkPin();
-
-                    }
-
-                });
-
-            }
-
         });
 
     </script>
@@ -419,25 +348,6 @@
         // Restore Quiz
         if (typeof loadProgress === "function") {
             loadProgress();
-        }
-
-        // PIN Input
-        const pin = document.getElementById("pinInput");
-
-        if (pin) {
-
-            pin.focus();
-
-            pin.addEventListener("keydown", function (e) {
-
-                if (e.key === "Enter") {
-
-                    checkPin();
-
-                }
-
-            });
-
         }
 
         console.log("✅ Student Login Enterprise v3.0 Loaded");

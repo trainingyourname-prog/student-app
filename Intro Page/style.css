@@ -1,0 +1,845 @@
+/* =====================================================
+   PROFESSIONAL INTRO V2.0
+   STYLE.CSS
+===================================================== */
+
+/* ==========================
+   RESET
+========================== */
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+font-family:'Poppins',sans-serif;
+
+}
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+body{
+
+width:100%;
+height:100vh;
+
+overflow:hidden;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:#050816;
+
+position:relative;
+
+}
+
+/* ==========================
+   ANIMATED BACKGROUND
+========================== */
+
+.background{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+overflow:hidden;
+
+z-index:-10;
+
+}
+
+/* ==========================
+   GRADIENT
+========================== */
+
+.gradient{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+background:
+
+linear-gradient(
+135deg,
+#050816,
+#111827,
+#1E3A8A,
+#312E81,
+#0F172A);
+
+background-size:500% 500%;
+
+animation:
+
+gradientMove 15s ease infinite;
+
+}
+
+@keyframes gradientMove{
+
+0%{
+
+background-position:0% 50%;
+
+}
+
+50%{
+
+background-position:100% 50%;
+
+}
+
+100%{
+
+background-position:0% 50%;
+
+}
+
+}
+
+/* ==========================
+   AURORA
+========================== */
+
+.aurora{
+
+position:absolute;
+
+width:150%;
+
+height:150%;
+
+left:-25%;
+top:-25%;
+
+background:
+
+radial-gradient(circle,
+
+rgba(0,229,255,.25),
+
+transparent 55%),
+
+radial-gradient(circle,
+
+rgba(139,92,246,.18),
+
+transparent 65%),
+
+radial-gradient(circle,
+
+rgba(0,255,153,.18),
+
+transparent 60%);
+
+animation:
+
+auroraMove 18s linear infinite;
+
+filter:blur(80px);
+
+}
+
+@keyframes auroraMove{
+
+0%{
+
+transform:
+
+rotate(0deg)
+scale(1);
+
+}
+
+50%{
+
+transform:
+
+rotate(180deg)
+scale(1.2);
+
+}
+
+100%{
+
+transform:
+
+rotate(360deg)
+scale(1);
+
+}
+
+}
+
+/* ==========================
+   STARS
+========================== */
+
+.stars{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+background-image:
+
+radial-gradient(white 1px,transparent 1px);
+
+background-size:55px 55px;
+
+opacity:.28;
+
+animation:
+
+starsMove 35s linear infinite;
+
+}
+
+@keyframes starsMove{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+100%{
+
+transform:translateY(-500px);
+
+}
+
+}
+
+/* ==========================
+   MAIN CARD
+========================== */
+
+.card{
+
+position:relative;
+
+width:92%;
+
+max-width:430px;
+
+padding:45px 28px;
+
+border-radius:30px;
+
+text-align:center;
+
+background:
+
+rgba(255,255,255,.08);
+
+backdrop-filter:
+
+blur(20px);
+
+border:
+
+1px solid
+
+rgba(255,255,255,.15);
+
+box-shadow:
+
+0 15px 50px
+
+rgba(0,0,0,.45);
+
+overflow:hidden;
+
+}
+
+/* ==========================
+   RGB BORDER
+========================== */
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+top:-50%;
+left:-50%;
+
+width:200%;
+height:200%;
+
+background:
+
+conic-gradient(
+
+transparent,
+
+#00E5FF,
+
+transparent,
+
+#8B5CF6,
+
+transparent,
+
+#00FF99,
+
+transparent
+
+);
+
+animation:
+
+rotateBorder 6s linear infinite;
+
+z-index:-2;
+
+}
+
+.card::after{
+
+content:"";
+
+position:absolute;
+
+inset:3px;
+
+background:#08101F;
+
+border-radius:28px;
+
+z-index:-1;
+
+}
+
+@keyframes rotateBorder{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+/* ==========================
+   TEXT
+========================== */
+
+#welcome{
+
+font-size:18px;
+
+font-weight:700;
+
+letter-spacing:8px;
+
+color:#00E5FF;
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+#title{
+
+margin-top:18px;
+
+font-size:38px;
+
+font-weight:800;
+
+color:white;
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+#subtitle{
+
+margin-top:18px;
+
+font-size:17px;
+
+line-height:1.8;
+
+color:#D1D5DB;
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo-box{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+margin-top:35px;
+
+}
+
+#logo{
+
+width:140px;
+
+height:140px;
+
+border-radius:50%;
+
+display:none;
+
+object-fit:cover;
+
+border:4px solid #00E5FF;
+
+box-shadow:
+
+0 0 20px #00E5FF,
+
+0 0 45px #8B5CF6,
+
+0 0 70px #00FF99;
+
+}
+
+/* Logo Animation */
+
+.logoShow{
+
+display:block !important;
+
+animation:
+
+logoZoom 1.2s ease,
+
+logoFloat 3s ease-in-out infinite,
+
+logoGlow 2s infinite;
+
+}
+
+@keyframes logoZoom{
+
+0%{
+
+opacity:0;
+
+transform:
+
+scale(.2)
+
+rotate(-180deg);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:
+
+scale(1)
+
+rotate(0deg);
+
+}
+
+}
+
+@keyframes logoFloat{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes logoGlow{
+
+0%{
+
+box-shadow:
+
+0 0 15px #00E5FF;
+
+}
+
+50%{
+
+box-shadow:
+
+0 0 55px #8B5CF6,
+
+0 0 85px #00FF99;
+
+}
+
+100%{
+
+box-shadow:
+
+0 0 15px #00E5FF;
+
+}
+
+}
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+#loadingBox{
+
+display:none;
+
+margin-top:35px;
+
+}
+
+#loadingText{
+
+font-size:18px;
+
+font-weight:600;
+
+color:white;
+
+margin-bottom:15px;
+
+}
+
+.progress{
+
+width:100%;
+
+height:12px;
+
+border-radius:25px;
+
+overflow:hidden;
+
+background:#1E293B;
+
+}
+
+#progressBar{
+
+width:0%;
+
+height:100%;
+
+border-radius:25px;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#00E5FF,
+
+#00FF99,
+
+#8B5CF6);
+
+transition:.3s;
+
+}
+
+#loadingPercent{
+
+margin-top:12px;
+
+font-size:20px;
+
+font-weight:700;
+
+color:white;
+
+}
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+.particles{
+
+position:absolute;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+pointer-events:none;
+
+overflow:hidden;
+
+}
+
+.particle{
+
+position:absolute;
+
+border-radius:50%;
+
+background:#00E5FF;
+
+opacity:.5;
+
+animation:particleMove linear infinite;
+
+}
+
+.p1{
+
+width:8px;
+
+height:8px;
+
+left:8%;
+
+bottom:-30px;
+
+animation-duration:10s;
+
+}
+
+.p2{
+
+width:10px;
+
+height:10px;
+
+left:22%;
+
+bottom:-25px;
+
+animation-duration:13s;
+
+}
+
+.p3{
+
+width:12px;
+
+height:12px;
+
+left:38%;
+
+bottom:-35px;
+
+animation-duration:12s;
+
+}
+
+.p4{
+
+width:14px;
+
+height:14px;
+
+left:52%;
+
+bottom:-20px;
+
+animation-duration:16s;
+
+}
+
+.p5{
+
+width:9px;
+
+height:9px;
+
+left:68%;
+
+bottom:-25px;
+
+animation-duration:11s;
+
+}
+
+.p6{
+
+width:12px;
+
+height:12px;
+
+left:80%;
+
+bottom:-35px;
+
+animation-duration:15s;
+
+}
+
+.p7{
+
+width:8px;
+
+height:8px;
+
+left:90%;
+
+bottom:-30px;
+
+animation-duration:9s;
+
+}
+
+.p8{
+
+width:16px;
+
+height:16px;
+
+left:48%;
+
+bottom:-40px;
+
+animation-duration:18s;
+
+}
+
+@keyframes particleMove{
+
+0%{
+
+transform:
+
+translateY(0)
+
+scale(.5);
+
+opacity:0;
+
+}
+
+25%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:
+
+translateY(-120vh)
+
+scale(1.5);
+
+opacity:0;
+
+}
+
+}
+
+/* =====================================================
+   FADE ANIMATION
+===================================================== */
+
+.fade{
+
+opacity:1 !important;
+
+transform:translateY(0) !important;
+
+transition:.9s;
+
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:480px){
+
+.card{
+
+width:94%;
+
+padding:35px 20px;
+
+}
+
+#title{
+
+font-size:30px;
+
+}
+
+#subtitle{
+
+font-size:15px;
+
+}
+
+#logo{
+
+width:115px;
+
+height:115px;
+
+}
+
+#welcome{
+
+font-size:16px;
+
+letter-spacing:6px;
+
+}
+
+}
